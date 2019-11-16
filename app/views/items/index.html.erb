@@ -1,0 +1,35 @@
+<h1>料金比較</h1>
+<p>値を入力してください</p>
+<%= form_with url: root_path,method: :get,local: :false do |f| %>
+  <div class="h">
+    縦:<%= f.text_field :h,value: @height %>cm
+  </div>
+  <div class="w">
+    横:<%= f.text_field :w,value: @width %>cm
+  </div>
+  <div class="d">
+    幅:<%= f.text_field :d,value: @depth %>cm
+  </div>
+  <div class="weight">
+    重さ:<%= f.text_field :weight,value: @weight %>g
+  </div>
+  <%= f.submit "Search", :name => nil %>
+<% end %>
+
+<%= will_paginate %>
+
+<div class="item">
+  <% if @items %>
+    <% @items.each do |item| %>
+      <ul>
+        <li>種類:<%= item.name %></li>
+        <li>値段:<%= item.price %>円</li>
+        <% if item.info %>
+          <li>その他:<%= item.info %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
+
+<%= will_paginate %>
